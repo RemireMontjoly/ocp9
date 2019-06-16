@@ -8,8 +8,12 @@
 	<string>We need your location to obtain your current weather conditions</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>com.ns Le Baluchon</key>
+			<string></string>
 			<key>openweathermap.org</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>

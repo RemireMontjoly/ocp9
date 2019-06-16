@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CurrencyViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class CurrencyViewController: UIViewController {
 
     var currencyArray = ["Euro", "Livre", "Couronne"]
     var currencySymbol: [String] = []
@@ -22,20 +22,14 @@ class CurrencyViewController: UIViewController, UIPickerViewDataSource, UIPicker
 
         currencyPicker.delegate = self
         currencyPicker.dataSource = self
-        CurrencyService.getCurrencyData(completionHandler: handleCurrencyDic(dico:))
+        CurrencyService.getCurrencyData { (currency) in
+            print(currency)
         }
-
-
-
-    func handleCurrencyDic(dico: [String]) {
-
-       // currencySymbol = dico.keys.map({$0})
-
-        print(dico)
-
     }
+}
 
-    
+extension CurrencyViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

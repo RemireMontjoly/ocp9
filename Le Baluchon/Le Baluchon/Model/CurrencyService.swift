@@ -8,17 +8,18 @@
 
 import Foundation
 
+
 struct CurrencyProperties: Decodable {
-
-    let rates: [String: [String: Double]]
-
+    let rates: [String: Float]
 }
-struct CurrencyService {
 
-    static func getCurrencyData(completionHandler: @escaping ([String]) -> ()) {
+class CurrencyService {
+
+    static func getCurrencyData(completionHandler: @escaping (_ currency: CurrencyProperties) -> ()) {
         let task = URLSession.shared.dataTask(with: EndPoint.currency.url) { (data, response, error) in
             guard let data = data, error == nil else {
-                print("error data not received")
+                print(error)
+                print(response)
                 return
             }
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
@@ -29,9 +30,9 @@ struct CurrencyService {
             print (response.statusCode)
             do {
                 let currencyListResponse = try decoder.decode(CurrencyProperties.self, from: data)
-                let currency = currencyListResponse.rates.keys.map({$0})
-                print(currency)
-                completionHandler(currency)
+                //  let currency = currencyListResponse.rates.keys.map({$0})
+
+                completionHandler(currencyListResponse)
 
             }
             catch {
@@ -42,3 +43,4 @@ struct CurrencyService {
         task.resume()
     }
 }
+

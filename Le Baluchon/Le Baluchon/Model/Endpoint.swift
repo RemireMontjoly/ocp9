@@ -26,8 +26,7 @@ enum EndPoint {
         case .weatherCity:
             return "http://api.openweathermap.org/data/2.5/weather?&units=metric"
         case .currency:
-            return "https://data.fixer.io/api/"
-
+            return "http://data.fixer.io/api/"
         case .translation:
             return "http://googleTranslate"
 

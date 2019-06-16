@@ -13,13 +13,16 @@ var cityName = "New+York"
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
+    let weatherService = WeatherService(networking: Networking())
+
+
     //For GPS location: Instance of locationManager
     let locationManager = CLLocationManager()
 
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var newYorkTemp: UILabel!
     @IBOutlet weak var newYorkConditionIcon: UIImageView!
-    
+
     //UI for GPS localization
     @IBOutlet weak var localTemperatureLabel: UILabel!
     @IBOutlet weak var localWeatherIcon: UIImageView!
@@ -27,7 +30,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        WeatherService.getWeatherData(url: EndPoint.weatherCity(name: cityName).url , completion: upDateUI(weatherProperties:))
+
+        weatherService.getWeatherData(endPoint: EndPoint.weatherCity(name: cityName), completion: upDateUI(weatherProperties:))
+        //        WeatherService.getWeatherData(url: EndPoint.weatherCity(name: cityName).url , completion: upDateUI(weatherProperties:))
 
         // For GPS location:
         locationManager.delegate = self
@@ -72,27 +77,28 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
             let latitude = String(location.coordinate.latitude)
             let longitude = String(location.coordinate.longitude)
-            WeatherService.getWeatherData(url: EndPoint.weatherLoc(lat: latitude, lon: longitude).url, completion: upDateUIWithGps(weatherProperties:))
+            //            WeatherService.getWeatherData(url: EndPoint.weatherLoc(lat: latitude, lon: longitude).url, completion: upDateUIWithGps(weatherProperties:))
+            weatherService.getWeatherData(endPoint: EndPoint.weatherLoc(lat: latitude, lon: longitude), completion: upDateUIWithGps(weatherProperties:))
         }
-
-        // If GPS Location unavailable
-        func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-            print(error)
-            localCityNameLabel.text = "Location unavailable"
-        }
-
     }
+
+    // If GPS Location unavailable
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+        localCityNameLabel.text = "Location unavailable"
+    }
+
 }
+
 
 extension WeatherViewController: ChangeCityDelegate {
     func userEnteredANewCityName(city: String) {
 
         let cityNameReplaceSpace = city.replacingOccurrences(of: " ", with: "+")
         cityName = cityNameReplaceSpace.capitalized
-
-        WeatherService.getWeatherData(url: EndPoint.weatherCity(name: cityName).url, completion: upDateUI(weatherProperties:))
+        //        WeatherService.getWeatherData(url: EndPoint.weatherCity(name: cityName).url, completion: upDateUI(weatherProperties:))
+        weatherService.getWeatherData(endPoint: EndPoint.weatherCity(name: cityName), completion: upDateUI(weatherProperties:))
     }
-
 }
 
 

@@ -31,30 +31,28 @@ struct WeatherProperties: Decodable {
 //MARK: - Struct for API call
 struct WeatherService {
 
-    static func getWeatherData(url: URL, completion: @escaping (_ weatherData: WeatherProperties) -> ()) {
+    let networking: Networking
+    init(networking: Networking) {
+        self.networking = networking
+    }
 
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data, error == nil else {
-                print("error data not received")
-                return
-            }
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                print("server error")
-                return
-            }
-            do {
-                let weatherData = try JSONDecoder().decode(WeatherProperties.self, from: data)
-                completion(weatherData)
-                print(weatherData.cityName)
-                print(weatherData.cityTemp.temp)
-                print(weatherData.weatherConditions[0].id)
-                print(weatherData.weatherConditions[0].description)
+    func getWeatherData(endPoint: EndPoint, completion: @escaping (_ weatherData: WeatherProperties) -> ()) {
 
-            } catch {
-                print(error.localizedDescription)
+        networking.request(endpoint: endPoint ) { (result) in
+            switch result {
+            case .failure(let error):
+                print("Failed to fetch: ", error)
+            case.success(let parsedWeatherProperties):
+                print(parsedWeatherProperties)
+
+                completion(parsedWeatherProperties)
+
+                print(parsedWeatherProperties.cityName)
+                print(parsedWeatherProperties.cityTemp.temp)
+                print(parsedWeatherProperties.weatherConditions[0].id)
+                print(parsedWeatherProperties.weatherConditions[0].description)
             }
         }
-        task.resume()
     }
 
     static func updateWeatherIcon(condition: Int) -> String {

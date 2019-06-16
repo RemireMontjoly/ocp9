@@ -9,27 +9,31 @@
 import Foundation
 
 
-class Networking {
+class Networking {    // quelles erreurs remontent?les 2?  // generic? <T: Equatable> non?
 
-    func request(endpoint: EndPoint, completionHandler: @escaping (Data?, Error?) -> ()) {
+    func request(endpoint: EndPoint, completionHandler: @escaping (Result<WeatherProperties, Error>) -> ()) {
+
         let task = URLSession.shared.dataTask(with: endpoint.url) { (data, response, error) in
-            guard let data = data, error == nil else {
-                completionHandler(nil, error)
-                print ("error: no Data")
+            if let error = error {
+                completionHandler(.failure(error))
+                // completion(nil, error)
                 return
             }
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 print("server error")
                 return
             }
-            completionHandler(data, error)
+            do {
+                let parsedJson = try JSONDecoder().decode(WeatherProperties.self, from: data!)
+                completionHandler(.success(parsedJson))
+                print(parsedJson)
+                // completion(error, nil)
 
-//            do {
-//                let weatherData = try JSONDecoder().decode(EndPoint.self, from: data)
-//                completionHandler(weatherData, nil)
-//            } catch {
-//                print(error.localizedDescription)
-//            }
+            } catch let decodeJsonError {
+                print("err 2")
+                completionHandler(.failure(decodeJsonError))
+                // completion(nil, error)
+            }
         }
         task.resume()
     }
