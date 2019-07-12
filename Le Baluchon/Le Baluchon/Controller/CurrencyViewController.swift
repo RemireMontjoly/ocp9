@@ -10,9 +10,11 @@ import UIKit
 
 class CurrencyViewController: UIViewController {
 
-    var currencyArray = ["Euro", "Livre", "Couronne"]
-    var currencySymbol: [String] = []
-    var currencyValue: [Int] = []
+    let currency = CurrencyRepository(networking: Networking())
+
+    var currencyArray = [String]()
+    var currencySymbol = [String]()
+    var currencyValue = [Int]()
 
     @IBOutlet weak var currencyPicker: UIPickerView!
     @IBOutlet weak var textField: UITextField!
@@ -22,8 +24,9 @@ class CurrencyViewController: UIViewController {
 
         currencyPicker.delegate = self
         currencyPicker.dataSource = self
-        CurrencyService.getCurrencyData { (currency) in
+        currency.getCurrency { (currency) in
             print(currency)
+            self.currencyArray += currency.rates.keys.map({$0})
         }
     }
 }

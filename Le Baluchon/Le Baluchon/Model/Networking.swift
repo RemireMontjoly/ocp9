@@ -8,31 +8,26 @@
 
 import Foundation
 
+protocol RequestApi {
+    func request<T>(endpoint: EndPoint, completionHandler: @escaping (Result<T, Error>) -> ()) where T : Decodable
+}
 
-class Networking {    // quelles erreurs remontent?les 2?  // generic? <T: Equatable> non?
+class Networking: RequestApi {
 
-    func request(endpoint: EndPoint, completionHandler: @escaping (Result<WeatherProperties, Error>) -> ()) {
+    func request<T: Decodable>(endpoint: EndPoint, completionHandler: @escaping (Result<T, Error>) -> ()) {
 
         let task = URLSession.shared.dataTask(with: endpoint.url) { (data, response, error) in
             if let error = error {
                 completionHandler(.failure(error))
-                // completion(nil, error)
-                return
-            }
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                print("server error")
                 return
             }
             do {
-                let parsedJson = try JSONDecoder().decode(WeatherProperties.self, from: data!)
-                completionHandler(.success(parsedJson))
-                print(parsedJson)
-                // completion(error, nil)
-
+                if let data = data {
+                    let parsedJson = try JSONDecoder().decode(T.self, from: data)
+                    completionHandler(.success(parsedJson))
+                }
             } catch let decodeJsonError {
-                print("err 2")
                 completionHandler(.failure(decodeJsonError))
-                // completion(nil, error)
             }
         }
         task.resume()

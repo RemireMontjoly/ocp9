@@ -28,29 +28,43 @@ struct WeatherProperties: Decodable {
         case weatherConditions = "weather"
     }
 }
-//MARK: - Struct for API call
-struct WeatherService {
+//MARK: - Class for API call
+class WeatherRepository {
 
-    let networking: Networking
-    init(networking: Networking) {
+    let networking: RequestApi
+    init(networking: RequestApi) {
         self.networking = networking
     }
 
-    func getWeatherData(endPoint: EndPoint, completion: @escaping (_ weatherData: WeatherProperties) -> ()) {
+    //    let networking: Networking
+    //    init(networking: Networking) {
+    //        self.networking = networking
+    //    }
 
-        networking.request(endpoint: endPoint ) { (result) in
+    func getWeatherDataByCity(cityName: String, completion: @escaping (_ weatherData: WeatherProperties) -> ()) {
+
+        networking.request(endpoint: EndPoint.weatherCity(name: cityName) ) { (result: Result<WeatherProperties, Error>) in
             switch result {
             case .failure(let error):
                 print("Failed to fetch: ", error)
-            case.success(let parsedWeatherProperties):
-                print(parsedWeatherProperties)
+            case.success(let parsedWeatherPropertiesByCityName):
+                print(parsedWeatherPropertiesByCityName)
 
-                completion(parsedWeatherProperties)
+                completion(parsedWeatherPropertiesByCityName)
+            }
+        }
+    }
 
-                print(parsedWeatherProperties.cityName)
-                print(parsedWeatherProperties.cityTemp.temp)
-                print(parsedWeatherProperties.weatherConditions[0].id)
-                print(parsedWeatherProperties.weatherConditions[0].description)
+    func getWeatherDataByGps(lat: String, lon: String, completion: @escaping (_ weatherData: WeatherProperties) -> ()) {
+
+        networking.request(endpoint: EndPoint.weatherLoc(lat: lat, lon: lon)) { (result: Result<WeatherProperties, Error>) in
+            switch result {
+            case.failure(let error):
+                print("Failed to get localizations: ",error)
+            case.success(let parsedWeatherPropertiesByLocalization):
+                print(parsedWeatherPropertiesByLocalization)
+
+                completion(parsedWeatherPropertiesByLocalization)
             }
         }
     }
@@ -91,7 +105,7 @@ struct WeatherService {
 
         case 904 :
             return "sunny"
-
+            
         default :
             return "dunno"
         }

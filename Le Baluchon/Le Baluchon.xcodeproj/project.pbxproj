@@ -7,20 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C1777D6122D8DAF70067BA0C /* TranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1777D6022D8DAF70067BA0C /* TranslateViewController.swift */; };
 		C18260F1228D8989000F0358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18260F0228D8989000F0358 /* AppDelegate.swift */; };
 		C18260F6228D8989000F0358 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C18260F4228D8989000F0358 /* Main.storyboard */; };
 		C18260F8228D8989000F0358 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C18260F7228D8989000F0358 /* Assets.xcassets */; };
 		C18260FB228D8989000F0358 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C18260F9228D8989000F0358 /* LaunchScreen.storyboard */; };
 		C1826106228D8C14000F0358 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1826105228D8C14000F0358 /* WeatherViewController.swift */; };
-		C1826108228D8CEF000F0358 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1826107228D8CEF000F0358 /* WeatherService.swift */; };
+		C1826108228D8CEF000F0358 /* WeatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1826107228D8CEF000F0358 /* WeatherRepository.swift */; };
 		C182610C228DA8C3000F0358 /* WeatherChangeCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182610B228DA8C3000F0358 /* WeatherChangeCityViewController.swift */; };
-		C191CECC22A907B600B805F3 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C191CECB22A907B600B805F3 /* CurrencyService.swift */; };
+		C191CECC22A907B600B805F3 /* CurrencyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C191CECB22A907B600B805F3 /* CurrencyRepository.swift */; };
 		C1A0405422A3CF14005F48EC /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A0405322A3CF14005F48EC /* Endpoint.swift */; };
 		C1A0405A22A542BA005F48EC /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A0405922A542BA005F48EC /* CurrencyViewController.swift */; };
 		C1A0405C22A6647B005F48EC /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A0405B22A6647B005F48EC /* Networking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C1777D6022D8DAF70067BA0C /* TranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateViewController.swift; sourceTree = "<group>"; };
 		C18260ED228D8989000F0358 /* Le Baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Le Baluchon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18260F0228D8989000F0358 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C18260F5228D8989000F0358 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -28,9 +30,9 @@
 		C18260FA228D8989000F0358 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C18260FC228D8989000F0358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1826105228D8C14000F0358 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
-		C1826107228D8CEF000F0358 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		C1826107228D8CEF000F0358 /* WeatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRepository.swift; sourceTree = "<group>"; };
 		C182610B228DA8C3000F0358 /* WeatherChangeCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherChangeCityViewController.swift; sourceTree = "<group>"; };
-		C191CECB22A907B600B805F3 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
+		C191CECB22A907B600B805F3 /* CurrencyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRepository.swift; sourceTree = "<group>"; };
 		C1A0405322A3CF14005F48EC /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		C1A0405922A542BA005F48EC /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 		C1A0405B22A6647B005F48EC /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				C1826105228D8C14000F0358 /* WeatherViewController.swift */,
 				C182610B228DA8C3000F0358 /* WeatherChangeCityViewController.swift */,
 				C1A0405922A542BA005F48EC /* CurrencyViewController.swift */,
+				C1777D6022D8DAF70067BA0C /* TranslateViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -98,8 +101,8 @@
 		C1826104228D89F3000F0358 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C1826107228D8CEF000F0358 /* WeatherService.swift */,
-				C191CECB22A907B600B805F3 /* CurrencyService.swift */,
+				C1826107228D8CEF000F0358 /* WeatherRepository.swift */,
+				C191CECB22A907B600B805F3 /* CurrencyRepository.swift */,
 				C1A0405B22A6647B005F48EC /* Networking.swift */,
 				C1A0405322A3CF14005F48EC /* Endpoint.swift */,
 			);
@@ -177,11 +180,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1826108228D8CEF000F0358 /* WeatherService.swift in Sources */,
+				C1826108228D8CEF000F0358 /* WeatherRepository.swift in Sources */,
 				C18260F1228D8989000F0358 /* AppDelegate.swift in Sources */,
 				C1826106228D8C14000F0358 /* WeatherViewController.swift in Sources */,
 				C1A0405A22A542BA005F48EC /* CurrencyViewController.swift in Sources */,
-				C191CECC22A907B600B805F3 /* CurrencyService.swift in Sources */,
+				C191CECC22A907B600B805F3 /* CurrencyRepository.swift in Sources */,
+				C1777D6122D8DAF70067BA0C /* TranslateViewController.swift in Sources */,
 				C182610C228DA8C3000F0358 /* WeatherChangeCityViewController.swift in Sources */,
 				C1A0405422A3CF14005F48EC /* Endpoint.swift in Sources */,
 				C1A0405C22A6647B005F48EC /* Networking.swift in Sources */,
