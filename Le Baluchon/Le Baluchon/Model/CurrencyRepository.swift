@@ -24,43 +24,20 @@ class CurrencyRepository {
     func getCurrency(completion: @escaping (_ currency: CurrencyProperties) -> ()) {
 
         networking.request(endpoint: EndPoint.currency) { (result: Result<CurrencyProperties, Error>) in
-            switch result {
-            case .failure(let error):
-                print("Failed to fetch", error)
-            case .success(let parsedCurrency):
+            DispatchQueue.main.async {
+                switch result {
+                case .failure(let error):
+                    
+                    
+                    print("Failed to fetch", error)
 
-                completion(parsedCurrency)
+                case .success(let parsedCurrency):
+
+                    completion(parsedCurrency)
+                }
             }
         }
     }
 
-
-    //     func getCurrencyData(completionHandler: @escaping (_ currency: CurrencyProperties) -> ()) {
-    //        let task = URLSession.shared.dataTask(with: EndPoint.currency.url) { (data, response, error) in
-    //            guard let data = data, error == nil else {
-    //                print(error)
-    //                print(response)
-    //                return
-    //            }
-    //            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-    //                print("server error")
-    //                return
-    //            }
-    //            let decoder = JSONDecoder()
-    //            print (response.statusCode)
-    //            do {
-    //                let currencyListResponse = try decoder.decode(CurrencyProperties.self, from: data)
-    //                //  let currency = currencyListResponse.rates.keys.map({$0})
-    //
-    //                completionHandler(currencyListResponse)
-    //
-    //            }
-    //            catch {
-    //                print ("je suis là")
-    //                print (error)
-    //            }
-    //        }
-    //        task.resume()
-    //    }
-    //}
+    
 }

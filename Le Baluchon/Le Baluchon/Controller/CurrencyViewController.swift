@@ -10,24 +10,76 @@ import UIKit
 
 class CurrencyViewController: UIViewController {
 
+    // Dependency Injection:
     let currency = CurrencyRepository(networking: Networking())
 
-    var currencyArray = [String]()
+    var currencyDict = [String: Float]()
     var currencySymbol = [String]()
-    var currencyValue = [Int]()
+    var currencyValueInDollar: Float = 0
 
+    @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var currencyPicker: UIPickerView!
     @IBOutlet weak var textField: UITextField!
 
     override func viewDidLoad() {
+
         super.viewDidLoad()
 
+        addingDoneButton()
+
+        // Setting PickerView:
         currencyPicker.delegate = self
         currencyPicker.dataSource = self
         currency.getCurrency { (currency) in
-            print(currency)
-            self.currencyArray += currency.rates.keys.map({$0})
+
+            print(currency.rates)
+            self.currencyDict = currency.rates
+            self.updatePickerView(currencyProperties: currency)
         }
+    }
+
+    // Adding a Done button in toolBar:
+    func addingDoneButton() {
+
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneClicked))
+        toolBar.setItems([doneButton], animated: true)
+        textField.inputAccessoryView = toolBar
+    }
+
+    // Dissmissing keyboard when Done button clicked and display result:
+    @objc func doneClicked() {
+        updateLabel(currencyValueInDollar: currencyValueInDollar)
+        view.endEditing(true)
+    }
+
+    // Mapping currencyDict in order to have the currency alphabeticaly sorted:
+    func updatePickerView(currencyProperties: CurrencyProperties) {
+
+        let keysFromDictionary = currencyProperties.rates.keys.map({$0})
+        let mySortedArray = keysFromDictionary.sorted(by: { $0 < $1 })
+        self.currencySymbol = mySortedArray
+        self.currencyPicker.reloadAllComponents()
+    }
+
+    func convertCurrencyInDollars(currencySymbol: String) {
+
+        guard let currencyValueVsEuro = currencyDict[currencySymbol] else {
+            return
+        }
+        guard let dollarValueVsEuro = currencyDict["USD"] else {
+            return
+        }
+        currencyValueInDollar = (dollarValueVsEuro/currencyValueVsEuro)
+        updateLabel(currencyValueInDollar: currencyValueInDollar)
+    }
+
+    func updateLabel(currencyValueInDollar: Float) {
+        let inputTextField = textField.text
+        print("\(currencyValueInDollar) is the corresponding value in Dollar")
+        let valueToDisplay = String((inputTextField! as NSString).floatValue * currencyValueInDollar)
+        resultLabel.text = valueToDisplay
     }
 }
 
@@ -38,12 +90,17 @@ extension CurrencyViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return currencyArray.count
+        return currencySymbol.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return currencyArray[row]
+        return currencySymbol[row]
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+        let selectedCurrency = currencySymbol[row]
+        convertCurrencyInDollars(currencySymbol: selectedCurrency)
     }
 }
-
 

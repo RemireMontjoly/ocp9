@@ -36,17 +36,14 @@ class WeatherRepository {
         self.networking = networking
     }
 
-    //    let networking: Networking
-    //    init(networking: Networking) {
-    //        self.networking = networking
-    //    }
-
     func getWeatherDataByCity(cityName: String, completion: @escaping (_ weatherData: WeatherProperties) -> ()) {
 
         networking.request(endpoint: EndPoint.weatherCity(name: cityName) ) { (result: Result<WeatherProperties, Error>) in
             switch result {
             case .failure(let error):
                 print("Failed to fetch: ", error)
+                // completion(error)
+
             case.success(let parsedWeatherPropertiesByCityName):
                 print(parsedWeatherPropertiesByCityName)
 
@@ -61,6 +58,7 @@ class WeatherRepository {
             switch result {
             case.failure(let error):
                 print("Failed to get localizations: ",error)
+                
             case.success(let parsedWeatherPropertiesByLocalization):
                 print(parsedWeatherPropertiesByLocalization)
 
@@ -93,7 +91,7 @@ class WeatherRepository {
 
         case 800 :
             return "sunny"
-
+            
         case 801...804 :
             return "cloudy2"
 
@@ -110,20 +108,11 @@ class WeatherRepository {
             return "dunno"
         }
     }
-
 }
 
 
 
 
-//            if let json1 = try? JSONSerialization.jsonObject(with: data, options: []) {
-//                print(json1)
-//            }
-//            if let json2 = String(data: data, encoding: String.Encoding.utf8) {
-//                print(json2)
-//            }
-//    if let json1 = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any] {
-//        print(json1)
-//    }
+
 
 

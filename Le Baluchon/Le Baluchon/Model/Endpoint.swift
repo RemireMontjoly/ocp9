@@ -46,8 +46,8 @@ enum EndPoint {
         }
     }
     
-    var url: URL {
-        return URL(string: completeURLString)!
+    var url: URL? {
+        return URL(string: completeURLString)
     }
 }
 

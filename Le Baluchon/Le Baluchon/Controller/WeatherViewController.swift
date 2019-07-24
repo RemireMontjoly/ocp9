@@ -96,8 +96,9 @@ extension WeatherViewController: ChangeCityDelegate {
     func userEnteredANewCityName(city: String) {
 
         let cityWithoutSpace = city.replacingOccurrences(of: " ", with: "+")
-        //        let cityWithoutAccent = cityWithoutSpace.folding(options: .diacriticInsensitive, locale: .current)
-        cityName = cityWithoutSpace
+        let cityWithoutAccent = cityWithoutSpace.folding(options: .diacriticInsensitive, locale: .current)
+        let cityWithCapitalizedFirstLetter = cityWithoutAccent.capitalized
+        cityName = cityWithCapitalizedFirstLetter
 
         weatherCondition.getWeatherDataByCity(cityName: cityName, completion: upDateUI(weatherProperties:))
     }
