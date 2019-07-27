@@ -31,8 +31,8 @@ struct WeatherProperties: Decodable {
 //MARK: - Class for API call
 class WeatherRepository {
 
-    let networking: RequestApi
-    init(networking: RequestApi) {
+    let networking: ApiRequest
+    init(networking: ApiRequest) {
         self.networking = networking
     }
 
@@ -41,7 +41,18 @@ class WeatherRepository {
         networking.request(endpoint: EndPoint.weatherCity(name: cityName) ) { (result: Result<WeatherProperties, Error>) in
             switch result {
             case .failure(let error):
+
                 print("Failed to fetch: ", error)
+                switch error {
+
+                case NetworkingError.invalidCityName:
+                    print("")
+                case NetworkingError.invalideUrl:
+                    //showInvalidUrlAlert
+                    print("")
+                default :
+                    print("")
+                }
                 // completion(error)
 
             case.success(let parsedWeatherPropertiesByCityName):

@@ -100,7 +100,13 @@ extension WeatherViewController: ChangeCityDelegate {
         let cityWithCapitalizedFirstLetter = cityWithoutAccent.capitalized
         cityName = cityWithCapitalizedFirstLetter
 
-        weatherCondition.getWeatherDataByCity(cityName: cityName, completion: upDateUI(weatherProperties:))
+        weatherCondition.getWeatherDataByCity(cityName: cityName) { data in
+
+            self.upDateUI(weatherProperties: data)
+        }
+// Deux manières de l'écrire -> laquelle est mieux?
+        
+//        weatherCondition.getWeatherDataByCity(cityName: cityName, completion:  upDateUI(weatherProperties:))
     }
 }
 

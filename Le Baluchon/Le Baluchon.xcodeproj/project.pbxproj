@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C10B26EC22E898E0005B63CD /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10B26EB22E898E0005B63CD /* ErrorAlert.swift */; };
 		C1777D6122D8DAF70067BA0C /* TranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1777D6022D8DAF70067BA0C /* TranslateViewController.swift */; };
 		C18260F1228D8989000F0358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18260F0228D8989000F0358 /* AppDelegate.swift */; };
 		C18260F6228D8989000F0358 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C18260F4228D8989000F0358 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C10B26EB22E898E0005B63CD /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		C1777D6022D8DAF70067BA0C /* TranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateViewController.swift; sourceTree = "<group>"; };
 		C18260ED228D8989000F0358 /* Le Baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Le Baluchon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18260F0228D8989000F0358 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				C182610B228DA8C3000F0358 /* WeatherChangeCityViewController.swift */,
 				C1A0405922A542BA005F48EC /* CurrencyViewController.swift */,
 				C1777D6022D8DAF70067BA0C /* TranslateViewController.swift */,
+				C10B26EB22E898E0005B63CD /* ErrorAlert.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1826108228D8CEF000F0358 /* WeatherRepository.swift in Sources */,
+				C10B26EC22E898E0005B63CD /* ErrorAlert.swift in Sources */,
 				C18260F1228D8989000F0358 /* AppDelegate.swift in Sources */,
 				C1826106228D8C14000F0358 /* WeatherViewController.swift in Sources */,
 				C1A0405A22A542BA005F48EC /* CurrencyViewController.swift in Sources */,
