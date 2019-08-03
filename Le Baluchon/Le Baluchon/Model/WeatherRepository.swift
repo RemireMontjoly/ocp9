@@ -36,30 +36,10 @@ class WeatherRepository {
         self.networking = networking
     }
 
-    func getWeatherDataByCity(cityName: String, completion: @escaping (_ weatherData: WeatherProperties) -> ()) {
+    func getWeatherDataByCity(cityName: String, completion: @escaping (Result<WeatherProperties, Error>) -> ()) {
 
         networking.request(endpoint: EndPoint.weatherCity(name: cityName) ) { (result: Result<WeatherProperties, Error>) in
-            switch result {
-            case .failure(let error):
-
-                print("Failed to fetch: ", error)
-                switch error {
-
-                case NetworkingError.invalidCityName:
-                    print("")
-                case NetworkingError.invalideUrl:
-                    //showInvalidUrlAlert
-                    print("")
-                default :
-                    print("")
-                }
-                // completion(error)
-
-            case.success(let parsedWeatherPropertiesByCityName):
-                print(parsedWeatherPropertiesByCityName)
-
-                completion(parsedWeatherPropertiesByCityName)
-            }
+            completion(result)
         }
     }
 

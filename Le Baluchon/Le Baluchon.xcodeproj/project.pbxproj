@@ -20,6 +20,7 @@
 		C1A0405422A3CF14005F48EC /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A0405322A3CF14005F48EC /* Endpoint.swift */; };
 		C1A0405A22A542BA005F48EC /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A0405922A542BA005F48EC /* CurrencyViewController.swift */; };
 		C1A0405C22A6647B005F48EC /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A0405B22A6647B005F48EC /* Networking.swift */; };
+		C1EC064C22F4A6DB00A0812E /* TranslateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EC064B22F4A6DB00A0812E /* TranslateRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		C1A0405322A3CF14005F48EC /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		C1A0405922A542BA005F48EC /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 		C1A0405B22A6647B005F48EC /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		C1EC064B22F4A6DB00A0812E /* TranslateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			children = (
 				C1826107228D8CEF000F0358 /* WeatherRepository.swift */,
 				C191CECB22A907B600B805F3 /* CurrencyRepository.swift */,
+				C1EC064B22F4A6DB00A0812E /* TranslateRepository.swift */,
 				C1A0405B22A6647B005F48EC /* Networking.swift */,
 				C1A0405322A3CF14005F48EC /* Endpoint.swift */,
 			);
@@ -187,6 +190,7 @@
 				C10B26EC22E898E0005B63CD /* ErrorAlert.swift in Sources */,
 				C18260F1228D8989000F0358 /* AppDelegate.swift in Sources */,
 				C1826106228D8C14000F0358 /* WeatherViewController.swift in Sources */,
+				C1EC064C22F4A6DB00A0812E /* TranslateRepository.swift in Sources */,
 				C1A0405A22A542BA005F48EC /* CurrencyViewController.swift in Sources */,
 				C191CECC22A907B600B805F3 /* CurrencyRepository.swift in Sources */,
 				C1777D6122D8DAF70067BA0C /* TranslateViewController.swift in Sources */,

@@ -11,7 +11,7 @@ import UIKit
 class CurrencyViewController: UIViewController {
 
     // Dependency Injection:
-    let currency = CurrencyRepository(networking: Networking())
+    let currencyRepository = CurrencyRepository(networking: Networking())
 
     var currencyDict = [String: Float]()
     var currencySymbol = [String]()
@@ -30,11 +30,14 @@ class CurrencyViewController: UIViewController {
         // Setting PickerView:
         currencyPicker.delegate = self
         currencyPicker.dataSource = self
-        currency.getCurrency { (currency) in
 
-            print(currency.rates)
+        currencyRepository.getCurrency { (currency) in
             self.currencyDict = currency.rates
             self.updatePickerView(currencyProperties: currency)
+            // Display first row currency calculation
+            if let selectedCurrency = self.currencySymbol.first {
+                self.convertCurrencyInDollars(currencySymbol: selectedCurrency)
+            }
         }
     }
 
@@ -58,7 +61,7 @@ class CurrencyViewController: UIViewController {
     func updatePickerView(currencyProperties: CurrencyProperties) {
 
         let keysFromDictionary = currencyProperties.rates.keys.map({$0})
-        let mySortedArray = keysFromDictionary.sorted(by: { $0 < $1 })
+        let mySortedArray = keysFromDictionary.sorted(by: <)
         self.currencySymbol = mySortedArray
         self.currencyPicker.reloadAllComponents()
     }

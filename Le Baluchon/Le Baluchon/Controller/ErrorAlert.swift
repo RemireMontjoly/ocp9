@@ -19,12 +19,12 @@ struct ErrorAlert {
         }
     }
 
-    static func showInvalidUrlAlert(on vc: UIViewController) {
-        showBasicAlert(on: vc, with: "Bad URL!", message: "Please enter a valide URL")
+    static func showGenericAlert(on vc: UIViewController) {
+        showBasicAlert(on: vc, with: "Error", message: "Unexpected error! Please try again.")
     }
 
     static func showUnableToFetchDataAlert(on vc: UIViewController) {
-        showBasicAlert(on: vc, with: "Failed to fecth Data", message: "Network error")
+        showBasicAlert(on: vc, with: "Failed to fetch Data", message: "Network error")
     }
 
     static func showCityNotFoundAlert(on vc: UIViewController) {

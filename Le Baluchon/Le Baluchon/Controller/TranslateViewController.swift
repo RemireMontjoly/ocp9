@@ -10,21 +10,35 @@ import UIKit
 
 class TranslateViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    let translatedText = TranslateRepository(networking: Networking())
 
-        // Do any additional setup after loading the view.
-    }
+    @IBOutlet weak var textField: UITextField!
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addingDoneButton()
+        translatedText.getTranslation { (result) in
+            print(result)
+        }
     }
-    */
+
+    // Adding a Done button in toolBar:
+    func addingDoneButton() {
+
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneClicked))
+        toolBar.setItems([doneButton], animated: true)
+        textField.inputAccessoryView = toolBar
+    }
+
+    // Dissmissing keyboard when Done button clicked and display result:
+    @objc func doneClicked() {
+        //updateLabel
+        view.endEditing(true)
+    }
+
 
 }

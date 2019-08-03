@@ -53,14 +53,26 @@
                     <view key="view" contentMode="scaleToFill" id="qMs-lF-76C">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4YR-sL-soa">
+                                <rect key="frame" x="16" y="83" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ntO-ca-Ubj"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="text" id="Ri5-gM-BWF"/>
+                    <connections>
+                        <outlet property="textField" destination="4YR-sL-soa" id="qCJ-P8-NxU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jCX-ey-ZOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1172" y="795"/>
+            <point key="canvasLocation" x="1172" y="794.75262368815595"/>
         </scene>
         <!--Currency View Controller-->
         <scene sceneID="ZP4-Kq-OLF">

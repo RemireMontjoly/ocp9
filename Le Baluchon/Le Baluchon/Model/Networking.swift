@@ -14,6 +14,7 @@ protocol ApiRequest {
 enum NetworkingError: Error {
     case invalideUrl
     case invalidCityName
+    case fetchingError
 }
 
 class Networking: ApiRequest {
@@ -21,22 +22,22 @@ class Networking: ApiRequest {
     func request<T: Decodable>(endpoint: EndPoint, completionHandler: @escaping (Result<T, Error>) -> ()) {
         guard let url = endpoint.url else {
             completionHandler(.failure(NetworkingError.invalideUrl))
-
-            print("Bad Url!")
+            // This error will display generic case.
+            print("Bad Url! \(NetworkingError.invalideUrl)")
             return
         }
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
-                completionHandler(.failure(error))
+                completionHandler(.failure(NetworkingError.fetchingError))
+                // This error will be display to the user cause it's probably an Internet issue.
+                print("Failed to fetch.No Data! \(error)")
 
-                print("Failed to fetch.No Data!")
+            }
+            if let response = response as? HTTPURLResponse, response.statusCode == 404 {
+                completionHandler(.failure(NetworkingError.invalidCityName))
+                // This error will be display to the user only for the weather city fetching case -> City not found.
+                print("server error")
 
-            } else {
-                if let response = response as? HTTPURLResponse, response.statusCode == 404 {
-                    completionHandler(.failure(NetworkingError.invalidCityName))
-
-                    print("City not found!")
-                }
             }
             do {
                 if let data = data {
@@ -45,8 +46,8 @@ class Networking: ApiRequest {
                 }
             } catch let decodeJsonError {
                 completionHandler(.failure(decodeJsonError))
-
-                print("Failed to decode!")
+                // this error will display a generic case.
+                print("Failed to decode!\(decodeJsonError)")
             }
         }
         task.resume()

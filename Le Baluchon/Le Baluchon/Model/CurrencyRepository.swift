@@ -32,7 +32,6 @@ class CurrencyRepository {
                     print("Failed to fetch", error)
 
                 case .success(let parsedCurrency):
-
                     completion(parsedCurrency)
                 }
             }

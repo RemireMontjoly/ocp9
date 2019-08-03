@@ -31,9 +31,25 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        weatherCondition.getWeatherDataByCity(cityName: cityName) { (weatherProperties) in
-            self.upDateUI(weatherProperties: weatherProperties)
-        }
+        userEnteredANewCityName(city: cityName)
+//        weatherCondition.getWeatherDataByCity(cityName: cityName) { result in
+//            switch result {
+//            case .success(let weatherProperties):
+//                self.updateUI(weatherProperties: weatherProperties)
+//            case .failure(let error):
+//                switch error {
+//                case NetworkingError.invalideUrl:
+//                    ErrorAlert.showGenericAlert(on: self)
+//
+//                case NetworkingError.fetchingError:
+//                    ErrorAlert.showUnableToFetchDataAlert(on: self)
+//
+//                default:
+//                    ErrorAlert.showGenericAlert(on: self)
+//                }
+//            }
+//
+//        }
 
         // For GPS location:
         locationManager.delegate = self
@@ -50,7 +66,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     //MARK: - Update UI
-    func upDateUI(weatherProperties: WeatherProperties) {
+    func updateUI(weatherProperties: WeatherProperties) {
         DispatchQueue.main.async {
             self.cityNameLabel.text = cityName.replacingOccurrences(of: "+", with: " ")
             self.newYorkTemp.text = String(Int(weatherProperties.cityTemp.temp)) + "°C"
@@ -78,19 +94,17 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
             let latitude = String(location.coordinate.latitude)
             let longitude = String(location.coordinate.longitude)
-            
+
             weatherCondition.getWeatherDataByGps(lat: latitude, lon: longitude, completion: upDateUIWithGps(weatherProperties:))
         }
     }
 
     // If GPS Location unavailable
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+        ErrorAlert.showUnableToFetchDataAlert(on: self)
         localCityNameLabel.text = "Location unavailable"
     }
-
 }
-
 
 extension WeatherViewController: ChangeCityDelegate {
     func userEnteredANewCityName(city: String) {
@@ -100,13 +114,27 @@ extension WeatherViewController: ChangeCityDelegate {
         let cityWithCapitalizedFirstLetter = cityWithoutAccent.capitalized
         cityName = cityWithCapitalizedFirstLetter
 
-        weatherCondition.getWeatherDataByCity(cityName: cityName) { data in
+        weatherCondition.getWeatherDataByCity(cityName: cityName) { result in
+            switch result {
+            case .success(let weatherProperties):
+                self.updateUI(weatherProperties: weatherProperties)
+            case .failure(let error):
+                switch error {
+                case NetworkingError.invalidCityName:
+                    ErrorAlert.showCityNotFoundAlert(on: self)
 
-            self.upDateUI(weatherProperties: data)
+                case NetworkingError.invalideUrl:
+                    ErrorAlert.showGenericAlert(on: self)
+
+                case NetworkingError.fetchingError:
+                    ErrorAlert.showUnableToFetchDataAlert(on: self)
+
+                default:
+                    ErrorAlert.showGenericAlert(on: self)
+
+                }
+            }
         }
-// Deux manières de l'écrire -> laquelle est mieux?
-        
-//        weatherCondition.getWeatherDataByCity(cityName: cityName, completion:  upDateUI(weatherProperties:))
     }
 }
 
