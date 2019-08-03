@@ -32,24 +32,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
 
         userEnteredANewCityName(city: cityName)
-//        weatherCondition.getWeatherDataByCity(cityName: cityName) { result in
-//            switch result {
-//            case .success(let weatherProperties):
-//                self.updateUI(weatherProperties: weatherProperties)
-//            case .failure(let error):
-//                switch error {
-//                case NetworkingError.invalideUrl:
-//                    ErrorAlert.showGenericAlert(on: self)
-//
-//                case NetworkingError.fetchingError:
-//                    ErrorAlert.showUnableToFetchDataAlert(on: self)
-//
-//                default:
-//                    ErrorAlert.showGenericAlert(on: self)
-//                }
-//            }
-//
-//        }
 
         // For GPS location:
         locationManager.delegate = self

@@ -31,9 +31,16 @@ class CurrencyViewController: UIViewController {
         currencyPicker.delegate = self
         currencyPicker.dataSource = self
 
-        currencyRepository.getCurrency { (currency) in
-            self.currencyDict = currency.rates
-            self.updatePickerView(currencyProperties: currency)
+        currencyRepository.getCurrency { (result) in
+            switch result {
+            case .success(let currency):
+                self.updatePickerView(currencyProperties: currency)
+                self.currencyDict = currency.rates
+            case .failure:
+                ErrorAlert.showGenericAlert(on: self)
+            }
+//            self.currencyDict = currency.rates
+//            self.updatePickerView(currencyProperties: currency)
             // Display first row currency calculation
             if let selectedCurrency = self.currencySymbol.first {
                 self.convertCurrencyInDollars(currencySymbol: selectedCurrency)

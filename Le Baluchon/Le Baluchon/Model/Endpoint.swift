@@ -11,7 +11,7 @@ import UIKit
 
 let weatherAPI_KEY = "4ba15fab0577b7ef6af21d2e8ef46019"
 let currencyAPI_KEY = "0b2448d5e7229823402c0052afd30f3f"
-let translateAPI_KEY = "AIzaSyC_hPL-0tzNB0uOZiuKZs4DpUKDNyYhnug"
+
 
 enum EndPoint {
 
@@ -30,7 +30,7 @@ enum EndPoint {
         case .currency:
             return "http://data.fixer.io/api/"
         case .translation:
-            return "https://translation.googleapis.com/language/translate/v2?format=text&q=demain&target=en&key=AIzaSyC_hPL-0tzNB0uOZiuKZs4DpUKDNyYhnug"
+            return "https"
 
         }
     }

@@ -21,22 +21,15 @@ class CurrencyRepository {
         self.networking = networking
     }
 
-    func getCurrency(completion: @escaping (_ currency: CurrencyProperties) -> ()) {
+    func getCurrency(completion: @escaping (Result<CurrencyProperties, Error>) -> ()) {
 
         networking.request(endpoint: EndPoint.currency) { (result: Result<CurrencyProperties, Error>) in
             DispatchQueue.main.async {
-                switch result {
-                case .failure(let error):
-                    
-                    
-                    print("Failed to fetch", error)
-
-                case .success(let parsedCurrency):
-                    completion(parsedCurrency)
+                    completion(result)
                 }
             }
         }
     }
 
     
-}
+
