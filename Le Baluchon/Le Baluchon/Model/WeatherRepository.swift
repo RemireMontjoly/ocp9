@@ -38,22 +38,17 @@ class WeatherRepository {
 
     func getWeatherDataByCity(cityName: String, completion: @escaping (Result<WeatherProperties, Error>) -> ()) {
 
-        networking.request(endpoint: EndPoint.weatherCity(name: cityName) ) { (result: Result<WeatherProperties, Error>) in
-            completion(result)
+        networking.request(endpoint: .weatherCity(name: cityName) ) { (result: Result<WeatherProperties, Error>) in
+            DispatchQueue.main.async {
+                completion(result)
+            }
         }
     }
+    func getWeatherDataByGps(lat: String, lon: String, completion: @escaping (Result<WeatherProperties, Error>) -> ()) {
 
-    func getWeatherDataByGps(lat: String, lon: String, completion: @escaping (_ weatherData: WeatherProperties) -> ()) {
-
-        networking.request(endpoint: EndPoint.weatherLoc(lat: lat, lon: lon)) { (result: Result<WeatherProperties, Error>) in
-            switch result {
-            case.failure(let error):
-                print("Failed to get localizations: ",error)
-                
-            case.success(let parsedWeatherPropertiesByLocalization):
-                print(parsedWeatherPropertiesByLocalization)
-
-                completion(parsedWeatherPropertiesByLocalization)
+        networking.request(endpoint: .weatherLoc(lat: lat, lon: lon)) { (result: Result<WeatherProperties, Error>) in
+            DispatchQueue.main.async {
+                completion(result)
             }
         }
     }
@@ -82,7 +77,7 @@ class WeatherRepository {
 
         case 800 :
             return "sunny"
-            
+
         case 801...804 :
             return "cloudy2"
 
@@ -94,7 +89,7 @@ class WeatherRepository {
 
         case 904 :
             return "sunny"
-            
+
         default :
             return "dunno"
         }

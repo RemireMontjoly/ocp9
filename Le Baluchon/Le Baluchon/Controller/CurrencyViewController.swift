@@ -39,8 +39,7 @@ class CurrencyViewController: UIViewController {
             case .failure:
                 ErrorAlert.showGenericAlert(on: self)
             }
-//            self.currencyDict = currency.rates
-//            self.updatePickerView(currencyProperties: currency)
+
             // Display first row currency calculation
             if let selectedCurrency = self.currencySymbol.first {
                 self.convertCurrencyInDollars(currencySymbol: selectedCurrency)

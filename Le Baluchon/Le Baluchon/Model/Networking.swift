@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ApiRequest {
-    func request<T: Decodable>(endpoint: EndPoint, completionHandler: @escaping (Result<T, Error>) -> ()) //where T : Decodable
+    func request<T: Decodable>(endpoint: Endpoint, completionHandler: @escaping (Result<T, Error>) -> ())
 }
 enum NetworkingError: Error {
     case invalideUrl
@@ -19,23 +19,24 @@ enum NetworkingError: Error {
 
 class Networking: ApiRequest {
 
-    func request<T: Decodable>(endpoint: EndPoint, completionHandler: @escaping (Result<T, Error>) -> ()) {
-        guard let url = endpoint.url else {
+    func request<T: Decodable>(endpoint: Endpoint, completionHandler: @escaping (Result<T, Error>) -> ()) {
+        guard let url = endpoint.finalUrl else {
             completionHandler(.failure(NetworkingError.invalideUrl))
             // This error will display generic case.
             print("Bad Url! \(NetworkingError.invalideUrl)")
             return
         }
+        
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 completionHandler(.failure(NetworkingError.fetchingError))
-                // This error will be display to the user cause it's probably an Internet issue.
+                // This error will be displayed to the user cause it's probably an Internet issue.
                 print("Failed to fetch.No Data! \(error)")
 
             }
             if let response = response as? HTTPURLResponse, response.statusCode == 404 {
                 completionHandler(.failure(NetworkingError.invalidCityName))
-                // This error will be display to the user only for the weather city fetching case -> City not found.
+                // This error will be displayed to the user only for the weather city fetching case -> City not found.
                 print("server error")
 
             }

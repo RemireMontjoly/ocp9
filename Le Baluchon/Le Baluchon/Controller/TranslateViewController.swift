@@ -12,15 +12,12 @@ class TranslateViewController: UIViewController {
 
     let translatedText = TranslateRepository(networking: Networking())
 
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var toTranslate: UITextField!
     
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var translationResult: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         addingDoneButton()
-        translatedText.getTranslation { (result) in
-            print(result)
-        }
     }
 
     // Adding a Done button in toolBar:
@@ -30,14 +27,26 @@ class TranslateViewController: UIViewController {
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneClicked))
         toolBar.setItems([doneButton], animated: true)
-        textField.inputAccessoryView = toolBar
+        toTranslate.inputAccessoryView = toolBar
     }
 
-    // Dissmissing keyboard when Done button clicked and display result:
+    // Dissmissing keyboard when Done button clicked and call display result:
     @objc func doneClicked() {
-        //updateLabel
+        // Fetching for translation
+        let textToTranslate = toTranslate.text!
+        translatedText.getTranslation(text: textToTranslate) { (result) in
+            switch result {
+            case .success(let success):
+                self.translationResult.text = success.data.translations[0].translatedText
+
+                print(self.translationResult.text!)
+
+            case .failure(let error):
+                //Pop up
+                print(error)
+            }
+        }
         view.endEditing(true)
     }
-
 
 }

@@ -28,12 +28,12 @@ class TranslateRepository {
         self.networking = networking
     }
 
-    func getTranslation(completion: @escaping (Result<Data, Error>) -> ()) {
+    func getTranslation(text: String, completion: @escaping (Result<Data, Error>) -> ()) {
 
-        networking.request(endpoint: EndPoint.translation ) { (result: Result<Data, Error>) in
-            print(result)
-            completion(result)
+        networking.request(endpoint: Endpoint.translation(myText: text) ) { (result: Result<Data, Error>) in
+            DispatchQueue.main.async {
+                completion(result)
+            }
         }
     }
-
 }

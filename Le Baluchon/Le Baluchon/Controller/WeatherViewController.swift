@@ -8,13 +8,12 @@
 
 import UIKit
 import CoreLocation
-
-var cityName = "New+York"
+// Avec le nouvel Endpoint les lignes commentées ci-dessous deviennent inutiles
+//var cityName = "New+York"
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
     let weatherCondition = WeatherRepository(networking: Networking())
-
 
     //For GPS location: Instance of locationManager
     let locationManager = CLLocationManager()
@@ -31,7 +30,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        userEnteredANewCityName(city: cityName)
+        userEnteredANewCityName(city: "New York")
 
         // For GPS location:
         locationManager.delegate = self
@@ -49,24 +48,24 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
     //MARK: - Update UI
     func updateUI(weatherProperties: WeatherProperties) {
-        DispatchQueue.main.async {
-            self.cityNameLabel.text = cityName.replacingOccurrences(of: "+", with: " ")
+// Avec le nouvel Endpoint les lignes commentées ci-dessous deviennent inutiles
+//            self.cityNameLabel.text = cityName.replacingOccurrences(of: "+", with: " ")
+            self.cityNameLabel.text = weatherProperties.cityName
             self.newYorkTemp.text = String(Int(weatherProperties.cityTemp.temp)) + "°C"
             let iconId = weatherProperties.weatherConditions[0].id
             self.newYorkConditionIcon.image = UIImage(named: WeatherRepository.updateWeatherIcon(condition: iconId) )
-        }
     }
 
     func upDateUIWithGps(weatherProperties: WeatherProperties) {
-        DispatchQueue.main.async {
+
             self.localTemperatureLabel.text = String(Int(weatherProperties.cityTemp.temp)) + "°C"
             self.localCityNameLabel.text = weatherProperties.cityName
             let iconId = weatherProperties.weatherConditions[0].id
             self.localWeatherIcon.image = UIImage(named: WeatherRepository.updateWeatherIcon(condition: iconId))
-        }
     }
 
     //MARK: - LocationManager Delegate methods
+    
     // For GPS location.Methode triggered by startUpdatingLocation()
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[locations.count - 1]
@@ -77,7 +76,20 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             let latitude = String(location.coordinate.latitude)
             let longitude = String(location.coordinate.longitude)
 
-            weatherCondition.getWeatherDataByGps(lat: latitude, lon: longitude, completion: upDateUIWithGps(weatherProperties:))
+            weatherCondition.getWeatherDataByGps(lat: latitude, lon: longitude) { result in
+                switch result {
+                case .success(let weatherProperties):
+                    self.upDateUIWithGps(weatherProperties: weatherProperties)
+                case .failure(let error):
+                    switch error {
+                    case NetworkingError.fetchingError:
+                        ErrorAlert.showUnableToFetchDataAlert(on: self)
+
+                    default:
+                        ErrorAlert.showGenericAlert(on: self)
+                    }
+                }
+            }
         }
     }
 
@@ -90,13 +102,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
 extension WeatherViewController: ChangeCityDelegate {
     func userEnteredANewCityName(city: String) {
+// Avec le nouvel Endpoint les lignes commentées ci-dessous deviennent inutiles
+//        let cityWithoutSpace = city.replacingOccurrences(of: " ", with: "+")
+//        let cityWithoutAccent = cityWithoutSpace.folding(options: .diacriticInsensitive, locale: .current)
+//        let cityWithCapitalizedFirstLetter = cityWithoutAccent.capitalized
+//        cityName = cityWithCapitalizedFirstLetter
 
-        let cityWithoutSpace = city.replacingOccurrences(of: " ", with: "+")
-        let cityWithoutAccent = cityWithoutSpace.folding(options: .diacriticInsensitive, locale: .current)
-        let cityWithCapitalizedFirstLetter = cityWithoutAccent.capitalized
-        cityName = cityWithCapitalizedFirstLetter
-
-        weatherCondition.getWeatherDataByCity(cityName: cityName) { result in
+        weatherCondition.getWeatherDataByCity(cityName: city) { result in
             switch result {
             case .success(let weatherProperties):
                 self.updateUI(weatherProperties: weatherProperties)
