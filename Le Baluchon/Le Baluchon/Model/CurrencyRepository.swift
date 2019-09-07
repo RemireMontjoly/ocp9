@@ -15,7 +15,7 @@ struct CurrencyProperties: Decodable {
 
 class CurrencyRepository {
 
-    let networking: Networking
+    private let networking: Networking
 
     init(networking: Networking) {
         self.networking = networking
@@ -25,11 +25,11 @@ class CurrencyRepository {
 
         networking.request(endpoint: Endpoint.currency) { (result: Result<CurrencyProperties, Error>) in
             DispatchQueue.main.async {
-                    completion(result)
-                }
+                completion(result)
             }
         }
     }
+}
 
-    
+
 

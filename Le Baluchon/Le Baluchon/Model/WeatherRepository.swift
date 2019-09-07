@@ -31,8 +31,8 @@ struct WeatherProperties: Decodable {
 //MARK: - Class for API call
 class WeatherRepository {
 
-    let networking: ApiRequest
-    init(networking: ApiRequest) {
+    private let networking: Networking
+    init(networking: Networking) {
         self.networking = networking
     }
 

@@ -10,8 +10,7 @@ import UIKit
 
 class CurrencyViewController: UIViewController {
 
-    // Dependency Injection:
-    let currencyRepository = CurrencyRepository(networking: Networking())
+    let currencyRepository = CurrencyRepository(networking: NetworkingImplementation())
 
     var currencyDict = [String: Float]()
     var currencySymbol = [String]()

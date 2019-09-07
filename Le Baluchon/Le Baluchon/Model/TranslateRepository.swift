@@ -23,8 +23,8 @@ struct TranslatedText: Decodable {
 
 class TranslateRepository {
 
-    let networking: ApiRequest
-    init(networking: ApiRequest) {
+    private let networking: Networking
+    init(networking: Networking) {
         self.networking = networking
     }
 

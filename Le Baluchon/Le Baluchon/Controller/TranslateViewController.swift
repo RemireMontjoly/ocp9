@@ -10,7 +10,7 @@ import UIKit
 
 class TranslateViewController: UIViewController {
 
-    let translatedText = TranslateRepository(networking: Networking())
+    let translatedText = TranslateRepository(networking: NetworkingImplementation())
 
     @IBOutlet weak var toTranslate: UITextField!
     
@@ -48,5 +48,5 @@ class TranslateViewController: UIViewController {
         }
         view.endEditing(true)
     }
-
+    
 }

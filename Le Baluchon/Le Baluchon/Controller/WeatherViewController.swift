@@ -8,12 +8,10 @@
 
 import UIKit
 import CoreLocation
-// Avec le nouvel Endpoint les lignes commentées ci-dessous deviennent inutiles
-//var cityName = "New+York"
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
-    let weatherCondition = WeatherRepository(networking: Networking())
+    let weatherCondition = WeatherRepository(networking: NetworkingImplementation())
 
     //For GPS location: Instance of locationManager
     let locationManager = CLLocationManager()
@@ -48,20 +46,19 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
     //MARK: - Update UI
     func updateUI(weatherProperties: WeatherProperties) {
-// Avec le nouvel Endpoint les lignes commentées ci-dessous deviennent inutiles
-//            self.cityNameLabel.text = cityName.replacingOccurrences(of: "+", with: " ")
-            self.cityNameLabel.text = weatherProperties.cityName
-            self.newYorkTemp.text = String(Int(weatherProperties.cityTemp.temp)) + "°C"
-            let iconId = weatherProperties.weatherConditions[0].id
-            self.newYorkConditionIcon.image = UIImage(named: WeatherRepository.updateWeatherIcon(condition: iconId) )
+
+        self.cityNameLabel.text = weatherProperties.cityName
+        self.newYorkTemp.text = String(Int(weatherProperties.cityTemp.temp)) + "°C"
+        let iconId = weatherProperties.weatherConditions[0].id
+        self.newYorkConditionIcon.image = UIImage(named: WeatherRepository.updateWeatherIcon(condition: iconId) )
     }
 
     func upDateUIWithGps(weatherProperties: WeatherProperties) {
 
-            self.localTemperatureLabel.text = String(Int(weatherProperties.cityTemp.temp)) + "°C"
-            self.localCityNameLabel.text = weatherProperties.cityName
-            let iconId = weatherProperties.weatherConditions[0].id
-            self.localWeatherIcon.image = UIImage(named: WeatherRepository.updateWeatherIcon(condition: iconId))
+        self.localTemperatureLabel.text = String(Int(weatherProperties.cityTemp.temp)) + "°C"
+        self.localCityNameLabel.text = weatherProperties.cityName
+        let iconId = weatherProperties.weatherConditions[0].id
+        self.localWeatherIcon.image = UIImage(named: WeatherRepository.updateWeatherIcon(condition: iconId))
     }
 
     //MARK: - LocationManager Delegate methods
@@ -102,11 +99,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
 extension WeatherViewController: ChangeCityDelegate {
     func userEnteredANewCityName(city: String) {
-// Avec le nouvel Endpoint les lignes commentées ci-dessous deviennent inutiles
-//        let cityWithoutSpace = city.replacingOccurrences(of: " ", with: "+")
-//        let cityWithoutAccent = cityWithoutSpace.folding(options: .diacriticInsensitive, locale: .current)
-//        let cityWithCapitalizedFirstLetter = cityWithoutAccent.capitalized
-//        cityName = cityWithCapitalizedFirstLetter
 
         weatherCondition.getWeatherDataByCity(cityName: city) { result in
             switch result {
@@ -125,7 +117,6 @@ extension WeatherViewController: ChangeCityDelegate {
 
                 default:
                     ErrorAlert.showGenericAlert(on: self)
-
                 }
             }
         }

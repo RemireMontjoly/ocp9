@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C10B26EC22E898E0005B63CD /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10B26EB22E898E0005B63CD /* ErrorAlert.swift */; };
+		C10C11A6231A524700511FB2 /* Currency.json in Resources */ = {isa = PBXBuildFile; fileRef = C10C11A5231A524700511FB2 /* Currency.json */; };
+		C10C11A8231A52CA00511FB2 /* NetworkingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10C11A7231A52CA00511FB2 /* NetworkingTestCase.swift */; };
+		C10C11AA231A536000511FB2 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10C11A9231A536000511FB2 /* FakeResponseData.swift */; };
 		C1777D6122D8DAF70067BA0C /* TranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1777D6022D8DAF70067BA0C /* TranslateViewController.swift */; };
 		C18260F1228D8989000F0358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18260F0228D8989000F0358 /* AppDelegate.swift */; };
 		C18260F6228D8989000F0358 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C18260F4228D8989000F0358 /* Main.storyboard */; };
@@ -23,8 +26,23 @@
 		C1EC064C22F4A6DB00A0812E /* TranslateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EC064B22F4A6DB00A0812E /* TranslateRepository.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C10C11A0231A515D00511FB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C18260E5228D8989000F0358 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C18260EC228D8989000F0358;
+			remoteInfo = "Le Baluchon";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		C10B26EB22E898E0005B63CD /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
+		C10C119B231A515D00511FB2 /* Le BaluchonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Le BaluchonTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C10C119F231A515D00511FB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C10C11A5231A524700511FB2 /* Currency.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Currency.json; sourceTree = "<group>"; };
+		C10C11A7231A52CA00511FB2 /* NetworkingTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTestCase.swift; sourceTree = "<group>"; };
+		C10C11A9231A536000511FB2 /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
 		C1777D6022D8DAF70067BA0C /* TranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateViewController.swift; sourceTree = "<group>"; };
 		C18260ED228D8989000F0358 /* Le Baluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Le Baluchon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18260F0228D8989000F0358 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +61,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C10C1198231A515D00511FB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C18260EA228D8989000F0358 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -53,10 +78,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C10C119C231A515D00511FB2 /* Le BaluchonTests */ = {
+			isa = PBXGroup;
+			children = (
+				C10C119F231A515D00511FB2 /* Info.plist */,
+				C10C11A5231A524700511FB2 /* Currency.json */,
+				C10C11A7231A52CA00511FB2 /* NetworkingTestCase.swift */,
+				C10C11A9231A536000511FB2 /* FakeResponseData.swift */,
+			);
+			path = "Le BaluchonTests";
+			sourceTree = "<group>";
+		};
 		C18260E4228D8989000F0358 = {
 			isa = PBXGroup;
 			children = (
 				C18260EF228D8989000F0358 /* Le Baluchon */,
+				C10C119C231A515D00511FB2 /* Le BaluchonTests */,
 				C18260EE228D8989000F0358 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				C18260ED228D8989000F0358 /* Le Baluchon.app */,
+				C10C119B231A515D00511FB2 /* Le BaluchonTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,6 +156,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C10C119A231A515D00511FB2 /* Le BaluchonTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C10C11A4231A515D00511FB2 /* Build configuration list for PBXNativeTarget "Le BaluchonTests" */;
+			buildPhases = (
+				C10C1197231A515D00511FB2 /* Sources */,
+				C10C1198231A515D00511FB2 /* Frameworks */,
+				C10C1199231A515D00511FB2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C10C11A1231A515D00511FB2 /* PBXTargetDependency */,
+			);
+			name = "Le BaluchonTests";
+			productName = "Le BaluchonTests";
+			productReference = C10C119B231A515D00511FB2 /* Le BaluchonTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C18260EC228D8989000F0358 /* Le Baluchon */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C18260FF228D8989000F0358 /* Build configuration list for PBXNativeTarget "Le Baluchon" */;
@@ -141,10 +197,15 @@
 		C18260E5228D8989000F0358 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1030;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = dino;
 				TargetAttributes = {
+					C10C119A231A515D00511FB2 = {
+						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1030;
+						TestTargetID = C18260EC228D8989000F0358;
+					};
 					C18260EC228D8989000F0358 = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
@@ -164,11 +225,20 @@
 			projectRoot = "";
 			targets = (
 				C18260EC228D8989000F0358 /* Le Baluchon */,
+				C10C119A231A515D00511FB2 /* Le BaluchonTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C10C1199231A515D00511FB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C10C11A6231A524700511FB2 /* Currency.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C18260EB228D8989000F0358 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -182,6 +252,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C10C1197231A515D00511FB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C10C11A8231A52CA00511FB2 /* NetworkingTestCase.swift in Sources */,
+				C10C11AA231A536000511FB2 /* FakeResponseData.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C18260E9228D8989000F0358 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -201,6 +280,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C10C11A1231A515D00511FB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C18260EC228D8989000F0358 /* Le Baluchon */;
+			targetProxy = C10C11A0231A515D00511FB2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C18260F4228D8989000F0358 /* Main.storyboard */ = {
@@ -222,6 +309,51 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C10C11A2231A515D00511FB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7DBH9F9Z39;
+				INFOPLIST_FILE = "Le BaluchonTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dino.Le-BaluchonTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Le Baluchon.app/Le Baluchon";
+			};
+			name = Debug;
+		};
+		C10C11A3231A515D00511FB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7DBH9F9Z39;
+				INFOPLIST_FILE = "Le BaluchonTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dino.Le-BaluchonTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Le Baluchon.app/Le Baluchon";
+			};
+			name = Release;
+		};
 		C18260FD228D8989000F0358 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -379,6 +511,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C10C11A4231A515D00511FB2 /* Build configuration list for PBXNativeTarget "Le BaluchonTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C10C11A2231A515D00511FB2 /* Debug */,
+				C10C11A3231A515D00511FB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C18260E8228D8989000F0358 /* Build configuration list for PBXProject "Le Baluchon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

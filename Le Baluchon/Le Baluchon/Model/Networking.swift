@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ApiRequest {
+protocol Networking {
     func request<T: Decodable>(endpoint: Endpoint, completionHandler: @escaping (Result<T, Error>) -> ())
 }
 enum NetworkingError: Error {
@@ -17,10 +17,10 @@ enum NetworkingError: Error {
     case fetchingError
 }
 
-class Networking: ApiRequest {
+class NetworkingImplementation: Networking {
 
     func request<T: Decodable>(endpoint: Endpoint, completionHandler: @escaping (Result<T, Error>) -> ()) {
-        guard let url = endpoint.finalUrl else {
+        guard let url = endpoint.url else {
             completionHandler(.failure(NetworkingError.invalideUrl))
             // This error will display generic case.
             print("Bad Url! \(NetworkingError.invalideUrl)")
