@@ -11,7 +11,7 @@ import CoreLocation
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
-    let weatherCondition = WeatherRepository(networking: NetworkingImplementation())
+    let weatherCondition = WeatherRepository(networking: NetworkingImplementation(networkingSession: URLSession.shared))
 
     //For GPS location: Instance of locationManager
     let locationManager = CLLocationManager()

@@ -20,6 +20,8 @@
 		C1826108228D8CEF000F0358 /* WeatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1826107228D8CEF000F0358 /* WeatherRepository.swift */; };
 		C182610C228DA8C3000F0358 /* WeatherChangeCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182610B228DA8C3000F0358 /* WeatherChangeCityViewController.swift */; };
 		C191CECC22A907B600B805F3 /* CurrencyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C191CECB22A907B600B805F3 /* CurrencyRepository.swift */; };
+		C195672F23238B0C00A97B63 /* URLSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C195672E23238B0C00A97B63 /* URLSessionFake.swift */; };
+		C1956731232BE24200A97B63 /* CurrencyTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1956730232BE24200A97B63 /* CurrencyTestCase.swift */; };
 		C1A0405422A3CF14005F48EC /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A0405322A3CF14005F48EC /* Endpoint.swift */; };
 		C1A0405A22A542BA005F48EC /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A0405922A542BA005F48EC /* CurrencyViewController.swift */; };
 		C1A0405C22A6647B005F48EC /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A0405B22A6647B005F48EC /* Networking.swift */; };
@@ -54,6 +56,8 @@
 		C1826107228D8CEF000F0358 /* WeatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRepository.swift; sourceTree = "<group>"; };
 		C182610B228DA8C3000F0358 /* WeatherChangeCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherChangeCityViewController.swift; sourceTree = "<group>"; };
 		C191CECB22A907B600B805F3 /* CurrencyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRepository.swift; sourceTree = "<group>"; };
+		C195672E23238B0C00A97B63 /* URLSessionFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionFake.swift; sourceTree = "<group>"; };
+		C1956730232BE24200A97B63 /* CurrencyTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTestCase.swift; sourceTree = "<group>"; };
 		C1A0405322A3CF14005F48EC /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		C1A0405922A542BA005F48EC /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 		C1A0405B22A6647B005F48EC /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
@@ -82,9 +86,11 @@
 			isa = PBXGroup;
 			children = (
 				C10C119F231A515D00511FB2 /* Info.plist */,
-				C10C11A5231A524700511FB2 /* Currency.json */,
 				C10C11A7231A52CA00511FB2 /* NetworkingTestCase.swift */,
+				C1956730232BE24200A97B63 /* CurrencyTestCase.swift */,
+				C195672E23238B0C00A97B63 /* URLSessionFake.swift */,
 				C10C11A9231A536000511FB2 /* FakeResponseData.swift */,
+				C10C11A5231A524700511FB2 /* Currency.json */,
 			);
 			path = "Le BaluchonTests";
 			sourceTree = "<group>";
@@ -256,7 +262,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1956731232BE24200A97B63 /* CurrencyTestCase.swift in Sources */,
 				C10C11A8231A52CA00511FB2 /* NetworkingTestCase.swift in Sources */,
+				C195672F23238B0C00A97B63 /* URLSessionFake.swift in Sources */,
 				C10C11AA231A536000511FB2 /* FakeResponseData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

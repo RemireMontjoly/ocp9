@@ -10,7 +10,7 @@ import UIKit
 
 class TranslateViewController: UIViewController {
 
-    let translatedText = TranslateRepository(networking: NetworkingImplementation())
+    let translatedText = TranslateRepository(networking: NetworkingImplementation(networkingSession: URLSession.shared))
 
     @IBOutlet weak var toTranslate: UITextField!
     

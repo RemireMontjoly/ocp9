@@ -8,16 +8,18 @@
 
 import Foundation
 
+
+
 class FakeResponseData {
 
     // MARK : - Response
     static let responseSuccess = HTTPURLResponse(
         url: URL(string: "https://monSite.com")!,
-        statusCode: 200, httpVersion: nil, headerFields: [:])!
+        statusCode: 200, httpVersion: nil, headerFields: nil)!
 
     static let responseFailure = HTTPURLResponse(
         url: URL(string: "https://monSite.com")!,
-        statusCode: 500, httpVersion: nil, headerFields: [:])!
+        statusCode: 404, httpVersion: nil, headerFields: nil)!
 
     // MARK : - Error
     class CurrencyError: Error {}

@@ -10,11 +10,11 @@ import UIKit
 
 class CurrencyViewController: UIViewController {
 
-    let currencyRepository = CurrencyRepository(networking: NetworkingImplementation())
+    let currencyRepository = CurrencyRepository(networking: NetworkingImplementation(networkingSession: URLSession.shared))
 
-    var currencyDict = [String: Float]()
+    var currencyDict = [String: Double]()
     var currencySymbol = [String]()
-    var currencyValueInDollar: Float = 0
+    var currencyValueInDollar: Double = 0
 
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var currencyPicker: UIPickerView!
@@ -58,7 +58,7 @@ class CurrencyViewController: UIViewController {
 
     // Dissmissing keyboard when Done button clicked and display result:
     @objc func doneClicked() {
-        updateLabel(currencyValueInDollar: currencyValueInDollar)
+        updateLabel(currencyValueInDollar: Float(currencyValueInDollar))
         view.endEditing(true)
     }
 
@@ -80,7 +80,7 @@ class CurrencyViewController: UIViewController {
             return
         }
         currencyValueInDollar = (dollarValueVsEuro/currencyValueVsEuro)
-        updateLabel(currencyValueInDollar: currencyValueInDollar)
+        updateLabel(currencyValueInDollar: Float(currencyValueInDollar))
     }
 
     func updateLabel(currencyValueInDollar: Float) {
