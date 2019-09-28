@@ -39,7 +39,6 @@ class NetworkingImplementation: Networking {
                 completionHandler(.failure(NetworkingError.fetchingError))
                 // This error will be displayed to the user cause it's probably an Internet issue.
                 print("Failed to fetch.No Data! \(error)")
-
             }
             if let response = response as? HTTPURLResponse, response.statusCode == 404 {
                 completionHandler(.failure(NetworkingError.invalidCityName))

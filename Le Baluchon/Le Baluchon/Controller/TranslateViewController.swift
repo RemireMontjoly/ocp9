@@ -13,8 +13,8 @@ class TranslateViewController: UIViewController {
     let translatedText = TranslateRepository(networking: NetworkingImplementation(networkingSession: URLSession.shared))
 
     @IBOutlet weak var toTranslate: UITextField!
-    
     @IBOutlet weak var translationResult: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addingDoneButton()
@@ -38,15 +38,10 @@ class TranslateViewController: UIViewController {
             switch result {
             case .success(let success):
                 self.translationResult.text = success.data.translations[0].translatedText
-
-                print(self.translationResult.text!)
-
-            case .failure(let error):
-                //Pop up
-                print(error)
+            case .failure:
+                ErrorAlert.showGenericAlert(on: self)
             }
         }
         view.endEditing(true)
     }
-    
 }

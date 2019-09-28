@@ -19,7 +19,6 @@ enum Endpoint {
     case weatherCity(name: String)
     case currency
     case translation(myText: String)
-    case test
 
     var url: URL? {
         var urlComponents = URLComponents(string: baseUrlString)
@@ -35,8 +34,6 @@ enum Endpoint {
             return "http://data.fixer.io/api/latest?"
         case .translation:
             return "https://translation.googleapis.com/language/translate/v2?"
-        case .test:
-            return "éà fake"
         }
     }
 
@@ -61,9 +58,6 @@ enum Endpoint {
                     URLQueryItem(name: "format", value: "text"),
                     URLQueryItem(name: "target", value: "en"),
                     URLQueryItem(name: "key", value: translationAPI_KEY)
-            ]
-        case .test:
-            return [URLQueryItem(name: "", value: "")
             ]
         }
     }

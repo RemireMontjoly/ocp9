@@ -13,21 +13,29 @@ import XCTest
 
 class NetworkingImplementationTestCase: XCTestCase {
 
-    func testRequestShouldPostFailureCallbackIfBadUrl() {
-        //Given
-        let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: nil, response: nil, error: nil))
-        // let endpoint = Endpoint.weatherLoc(lat: "é  ", lon: " à")
-        let endpointTest = Endpoint.test // Trying to send a bad URL...
+    // test que le Networking ne renvoi pas badUrl
+    func testRequestShouldNeverFailWithEndpoint() {
+        //tous les Endpoint
 
-        //When
-        networkingImplementation.request(endpoint: endpointTest) {(result: Result<CurrencyProperties, Error>) in
-            if case .failure(let error) = result {
-                //Then
-                XCTAssertTrue(error is NetworkingError)
-                XCTAssertEqual(error as! NetworkingError, NetworkingError.invalideUrl)
-            }
-        }
+        let endpoint = Endpoint.currency.url
+        XCTAssertNotNil(endpoint)
     }
+
+//    func testRequestShouldPostFailureCallbackIfBadUrl() {
+//        //Given
+//        let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: nil, response: nil, error: nil))
+//        // let endpoint = Endpoint.weatherLoc(lat: "é  ", lon: " à")
+//        let endpointTest = Endpoint.test // Trying to send a bad URL...
+//
+//        //When
+//        networkingImplementation.request(endpoint: endpointTest) {(result: Result<CurrencyProperties, Error>) in
+//            if case .failure(let error) = result {
+//                //Then
+//                XCTAssertTrue(error is NetworkingError)
+//                XCTAssertEqual(error as! NetworkingError, NetworkingError.invalideUrl)
+//            }
+//        }
+//    }
 
     func testRequestShouldPostFailureCallbackIfError() {
         //Given
