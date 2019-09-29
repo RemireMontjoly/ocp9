@@ -8,4 +8,4 @@
 
 import Foundation
 let test = "123Azerty"
-
+let test2 = "sdff"
