@@ -14,41 +14,36 @@ import XCTest
 class NetworkingImplementationTestCase: XCTestCase {
 
     // test que le Networking ne renvoi pas badUrl
-    func testRequestShouldNeverFailWithEndpoint() {
-        //tous les Endpoint
+    func testRequestShouldPostFailureCallbackIfBadUrl() {
+        //Given
+        let corruptedUrl = URL(string: "éé")
 
-        let endpoint = Endpoint.currency.url
-        XCTAssertNotNil(endpoint)
+        let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: nil, response: nil, error: nil))
+
+        //When
+        networkingImplementation.request(endpoint: corruptedUrl) { (result:Result<CurrencyProperties, Error>) in
+            if case .failure(let error) = result {
+                XCTAssertTrue(error is NetworkingError)
+                XCTAssertEqual(error as! NetworkingError, NetworkingError.invalideUrl)
+            }
+        }
     }
-
-//    func testRequestShouldPostFailureCallbackIfBadUrl() {
-//        //Given
-//        let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: nil, response: nil, error: nil))
-//        // let endpoint = Endpoint.weatherLoc(lat: "é  ", lon: " à")
-//        let endpointTest = Endpoint.test // Trying to send a bad URL...
-//
-//        //When
-//        networkingImplementation.request(endpoint: endpointTest) {(result: Result<CurrencyProperties, Error>) in
-//            if case .failure(let error) = result {
-//                //Then
-//                XCTAssertTrue(error is NetworkingError)
-//                XCTAssertEqual(error as! NetworkingError, NetworkingError.invalideUrl)
-//            }
-//        }
-//    }
 
     func testRequestShouldPostFailureCallbackIfError() {
         //Given
         let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: nil, response: nil, error: FakeResponseData.error))
 
         //When
-        networkingImplementation.request(endpoint: Endpoint.currency) { (result:  Result<CurrencyProperties, Error>) in
+        let expectation = self.expectation(description: "Get currency success")
+        networkingImplementation.request(endpoint: Endpoint.currency.url) { (result:  Result<CurrencyProperties, Error>) in
             if case .failure(let error) = result {
                 //Then
                 XCTAssertTrue(error is NetworkingError)
                 XCTAssertEqual(error as! NetworkingError, NetworkingError.fetchingError)
+                expectation.fulfill()
             }
         }
+        waitForExpectations(timeout: 0.1)
     }
 
     func testRequestShouldPostFailureCallbackIfStatusCodeIs404() {
@@ -56,7 +51,7 @@ class NetworkingImplementationTestCase: XCTestCase {
         let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: nil, response: FakeResponseData.responseFailure, error: nil))
 
         //When
-        networkingImplementation.request(endpoint: Endpoint.currency) { (result:  Result<CurrencyProperties, Error>) in
+        networkingImplementation.request(endpoint: Endpoint.currency.url) { (result:  Result<CurrencyProperties, Error>) in
             if case .failure(let error) = result {
                 //Then
                 XCTAssertTrue(error is NetworkingError)
@@ -69,7 +64,7 @@ class NetworkingImplementationTestCase: XCTestCase {
         //Given
         let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: FakeResponseData.currencyData, response: nil, error: nil))
         //When
-        networkingImplementation.request(endpoint: Endpoint.currency) { (result:  Result<CurrencyProperties, Error>) in
+        networkingImplementation.request(endpoint: Endpoint.currency.url) { (result:  Result<CurrencyProperties, Error>) in
             if case .success(let success) = result {
                 //Then
                 let fakeRates = ["AED": 4.044198,"AFN": 85.827195,"ALL": 122.271908]
@@ -83,7 +78,7 @@ class NetworkingImplementationTestCase: XCTestCase {
         //Given
         let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: FakeResponseData.corruptedData, response: nil, error: nil))
         //When
-        networkingImplementation.request(endpoint: Endpoint.currency) { (result: Result<CurrencyProperties, Error>) in
+        networkingImplementation.request(endpoint: Endpoint.currency.url) { (result: Result<CurrencyProperties, Error>) in
             if case .failure(let error) = result {
                 //Then
                 XCTAssertTrue(error is NetworkingError)

@@ -15,7 +15,7 @@ class MockNetworking: Networking {
     init(shouldReturnError: Bool) {
         self.shouldReturnError = shouldReturnError
     }
-    func request<T>(endpoint: Endpoint, completionHandler: @escaping (Result<T, Error>) -> ()) where T : Decodable {
+    func request<T>(endpoint: URL?, completionHandler: @escaping (Result<T, Error>) -> ()) where T : Decodable {
         if shouldReturnError {
             completionHandler(.failure(NetworkingError.fetchingError))
         } else {

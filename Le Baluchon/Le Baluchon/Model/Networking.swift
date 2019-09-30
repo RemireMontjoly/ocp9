@@ -9,7 +9,7 @@
 import Foundation
 
 protocol Networking {
-    func request<T: Decodable>(endpoint: Endpoint, completionHandler: @escaping (Result<T, Error>) -> ())
+    func request<T: Decodable>(endpoint: URL?, completionHandler: @escaping (Result<T, Error>) -> ())
 }
 
 enum NetworkingError: Error {
@@ -26,8 +26,8 @@ class NetworkingImplementation: Networking {
         self.networkingSession = networkingSession
     }
     
-    func request<T: Decodable>(endpoint: Endpoint, completionHandler: @escaping (Result<T, Error>) -> ()) {
-        guard let url = endpoint.url else {
+    func request<T: Decodable>(endpoint: URL?, completionHandler: @escaping (Result<T, Error>) -> ()) {
+        guard let url = endpoint else {
             completionHandler(.failure(NetworkingError.invalideUrl))
             // This error will display generic case.
             print("Bad Url! \(NetworkingError.invalideUrl)")

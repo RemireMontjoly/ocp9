@@ -18,6 +18,8 @@ class TranslateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addingDoneButton()
+        let test = Endpoint.currency.baseUrlString.isEmpty
+        print("Je print mon test: \(test)")
     }
 
     // Adding a Done button in toolBar:

@@ -23,7 +23,7 @@ class CurrencyRepository {
 
     func getCurrency(completion: @escaping (Result<CurrencyProperties, Error>) -> ()) {
 
-        networking.request(endpoint: Endpoint.currency) { (result: Result<CurrencyProperties, Error>) in
+        networking.request(endpoint: Endpoint.currency.url) { (result: Result<CurrencyProperties, Error>) in
             DispatchQueue.main.async {
                 completion(result)
             }

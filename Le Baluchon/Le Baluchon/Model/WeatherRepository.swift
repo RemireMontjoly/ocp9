@@ -38,7 +38,7 @@ class WeatherRepository {
 
     func getWeatherDataByCity(cityName: String, completion: @escaping (Result<WeatherProperties, Error>) -> ()) {
 
-        networking.request(endpoint: .weatherCity(name: cityName) ) { (result: Result<WeatherProperties, Error>) in
+        networking.request(endpoint: Endpoint.weatherCity(name: cityName).url ) { (result: Result<WeatherProperties, Error>) in
             DispatchQueue.main.async {
                 completion(result)
             }
@@ -46,7 +46,7 @@ class WeatherRepository {
     }
     func getWeatherDataByGps(lat: String, lon: String, completion: @escaping (Result<WeatherProperties, Error>) -> ()) {
 
-        networking.request(endpoint: .weatherLoc(lat: lat, lon: lon)) { (result: Result<WeatherProperties, Error>) in
+        networking.request(endpoint: Endpoint.weatherLoc(lat: lat, lon: lon).url) { (result: Result<WeatherProperties, Error>) in
             DispatchQueue.main.async {
                 completion(result)
             }

@@ -9,12 +9,10 @@
 import Foundation
 import UIKit
 
-let getTest2 = test2
-let getTest = test
 let weatherAPI_KEY = "4ba15fab0577b7ef6af21d2e8ef46019"
 let currencyAPI_KEY = "0b2448d5e7229823402c0052afd30f3f"
 let translationAPI_KEY = "myApiKey"
-
+    
 enum Endpoint {
 
     case weatherLoc(lat: String, lon: String)
