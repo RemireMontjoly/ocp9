@@ -11,7 +11,7 @@ import UIKit
 
 let weatherAPI_KEY = myWeatherApiKey
 let currencyAPI_KEY = myCurrencyApiKey
-let translationAPI_KEY = "myApiKey"
+let translationAPI_KEY = myTranslationApiKey
     
 enum Endpoint {
 
