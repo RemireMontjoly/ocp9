@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Data: Decodable {
+struct TranslationResponse: Decodable {
     let data: Translations
 }
 
@@ -28,9 +28,9 @@ class TranslateRepository {
         self.networking = networking
     }
 
-    func getTranslation(text: String, completion: @escaping (Result<Data, Error>) -> ()) {
+    func getTranslation(text: String, completion: @escaping (Result<TranslationResponse, Error>) -> ()) {
 
-        networking.request(endpoint: Endpoint.translation(myText: text).url ) { (result: Result<Data, Error>) in
+        networking.request(endpoint: Endpoint.translation(myText: text).url ) { (result: Result<TranslationResponse, Error>) in
             DispatchQueue.main.async {
                 completion(result)
             }

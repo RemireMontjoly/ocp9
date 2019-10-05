@@ -17,7 +17,6 @@ class NetworkingImplementationTestCase: XCTestCase {
     func testRequestShouldPostFailureCallbackIfBadUrl() {
         //Given
         let corruptedUrl = URL(string: "éé")
-
         let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: nil, response: nil, error: nil))
 
         //When
@@ -34,7 +33,7 @@ class NetworkingImplementationTestCase: XCTestCase {
         let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: nil, response: nil, error: FakeResponseData.error))
 
         //When
-        let expectation = self.expectation(description: "Get currency success")
+        let expectation = self.expectation(description: "Get error")
         networkingImplementation.request(endpoint: Endpoint.currency.url) { (result:  Result<CurrencyProperties, Error>) in
             if case .failure(let error) = result {
                 //Then
@@ -43,7 +42,7 @@ class NetworkingImplementationTestCase: XCTestCase {
                 expectation.fulfill()
             }
         }
-        waitForExpectations(timeout: 0.1)
+        waitForExpectations(timeout: 0.01)
     }
 
     func testRequestShouldPostFailureCallbackIfStatusCodeIs404() {
@@ -51,40 +50,51 @@ class NetworkingImplementationTestCase: XCTestCase {
         let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: nil, response: FakeResponseData.responseFailure, error: nil))
 
         //When
+        let expectation = self.expectation(description: "Get response error 404")
         networkingImplementation.request(endpoint: Endpoint.currency.url) { (result:  Result<CurrencyProperties, Error>) in
             if case .failure(let error) = result {
                 //Then
                 XCTAssertTrue(error is NetworkingError)
                 XCTAssertEqual(error as! NetworkingError, NetworkingError.invalidCityName)
+                expectation.fulfill()
             }
         }
+        waitForExpectations(timeout: 0.01)
     }
 
     func testRequestShouldPostSuccessCallbackIfNoErrorAndCorrectData() {
         //Given
         let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: FakeResponseData.currencyData, response: nil, error: nil))
+
         //When
+        let expectation = self.expectation(description: "Get correct data")
         networkingImplementation.request(endpoint: Endpoint.currency.url) { (result:  Result<CurrencyProperties, Error>) in
             if case .success(let success) = result {
                 //Then
                 let fakeRates = ["AED": 4.044198,"AFN": 85.827195,"ALL": 122.271908]
                 //  let transform =  Double(fakeRates)
                 XCTAssertEqual(success.rates, fakeRates)
+                expectation.fulfill()
             }
         }
+        waitForExpectations(timeout: 0.01)
     }
 
     func testRequestShouldPostFailureCallbackIfCorruptedData() {
         //Given
         let networkingImplementation = NetworkingImplementation(networkingSession: URLSessionFake(data: FakeResponseData.corruptedData, response: nil, error: nil))
+        
         //When
+        let expectation = self.expectation(description: "Get decode data error")
         networkingImplementation.request(endpoint: Endpoint.currency.url) { (result: Result<CurrencyProperties, Error>) in
             if case .failure(let error) = result {
                 //Then
                 XCTAssertTrue(error is NetworkingError)
                 XCTAssertEqual(error as! NetworkingError, NetworkingError.decodeJsonError)
+                expectation.fulfill()
             }
         }
+        waitForExpectations(timeout: 0.01)
     }
 }
 

@@ -34,6 +34,7 @@ class CurrencyTestCase: XCTestCase {
         let expectation = self.expectation(description: "Get currency success")
         repository.getCurrency { (result) in
             if case .success(let currencyProperties) = result {
+
                 //Then
                 XCTAssertEqual(currencyProperties.rates, ["": 0.9])
                 expectation.fulfill()
@@ -50,6 +51,7 @@ class CurrencyTestCase: XCTestCase {
         let expectation = self.expectation(description: "Get currency failure")
         repository.getCurrency { (result) in
             if case .failure(let error) = result {
+                
                 //Then
                 XCTAssertTrue(error is NetworkingError)
                 XCTAssertEqual(error as! NetworkingError, NetworkingError.fetchingError)
